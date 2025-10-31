@@ -1,8 +1,8 @@
 disabled = false
-languageCode = "en"
-languageName = "English"
+languageCode = "zh-cn"
+languageName = "Simplified Chinese(China)"
 weight = 1
-title = "Blowfish"
+title = "xeri的博客"
 
 [params]
   displayName = "简体中文"
