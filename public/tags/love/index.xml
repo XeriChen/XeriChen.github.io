@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LOVE on xeri的博客</title>
-    <link>/tags/love/</link>
-    <description>Recent content in LOVE on xeri的博客</description>
+    <title>LOVE on XeriChen的博客</title>
+    <link>//localhost:1313/tags/love/</link>
+    <description>Recent content in LOVE on XeriChen的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <managingEditor>xeri_chen@163.com (xeri)</managingEditor>
-    <webMaster>xeri_chen@163.com (xeri)</webMaster>
-    <copyright>© 2026 xeri</copyright>
-    <lastBuildDate>Mon, 19 Jan 2026 16:30:13 +0800</lastBuildDate><atom:link href="/tags/love/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>xeri_chen@163.com (xeri_chen)</managingEditor>
+    <webMaster>xeri_chen@163.com (xeri_chen)</webMaster>
+    <copyright>© 2026 xeri_chen</copyright>
+    <lastBuildDate>Tue, 20 Jan 2026 17:27:24 +0800</lastBuildDate><atom:link href="//localhost:1313/tags/love/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ESTJandINFP</title>
+      <link>//localhost:1313/posts/estjandinfp/</link>
+      <pubDate>Tue, 20 Jan 2026 17:27:24 +0800</pubDate>
+      <author>xeri_chen@163.com (xeri_chen)</author>
+      <guid>//localhost:1313/posts/estjandinfp/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>那些年喜欢的二次元老婆</title>
-      <link>/posts/lovely/</link>
+      <link>//localhost:1313/posts/lovely/</link>
       <pubDate>Mon, 19 Jan 2026 16:30:13 +0800</pubDate>
-      <author>xeri_chen@163.com (xeri)</author>
-      <guid>/posts/lovely/</guid>
+      <author>xeri_chen@163.com (xeri_chen)</author>
+      <guid>//localhost:1313/posts/lovely/</guid>
       <description></description>
       
     </item>

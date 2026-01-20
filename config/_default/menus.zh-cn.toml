@@ -10,10 +10,27 @@
 # overridden by providing a weight value. The menu will then be
 # ordered by weight from lowest to highest.
 
+#[[main]]
+#name = "Blog"
+#pageRef = "/posts"
+#weight = 10
+
 [[main]]
-name = "Blog"
+name = "文章"
 pageRef = "/posts"
-weight = 10
+weight = 7
+
+[[main]]
+name = "MBTI"
+parent = "文章"
+pageRef = "tags/mbti"
+weight = 8
+
+[[main]]
+name = "LOVE"
+parent = "文章"
+pageRef = "tags/love"
+weight = 9
 
 #[[main]]
 #  name = "Parent"
@@ -47,10 +64,10 @@ weight = 10
 #  pageRef = "categories"
 #  weight = 20
 
-#[[main]]
-#  name = "Tags"
-#  pageRef = "tags"
-#  weight = 30
+[[main]]
+  name = "标签"
+  pageRef = "tags"
+  weight = 30
 
 
 # -- Footer Menu --
@@ -58,10 +75,10 @@ weight = 10
 # the copyright notice. Configure as per the main menu above.
 
 
-# [[footer]]
-#   name = "Tags"
-#   pageRef = "tags"
-#   weight = 10
+ [[footer]]
+   name = "Tags"
+   pageRef = "tags"
+   weight = 10
 
 # [[footer]]
 #   name = "Categories"
