@@ -3,7 +3,7 @@ title: "INFP"
 date: 2026-01-20T16:15:47+08:00
 draft: false
 tags: ["MBTI"]
-description:""
+description: ""
 ---
 
 # INFP分析
