@@ -11,3 +11,21 @@
 ```bash
 git clone --recurse-submodules git@github.com:XeriChen/XeriChen.github.io.git
 ```
+
+## add new post
+
+```bash
+hugo new posts/your-post-title.md
+```
+
+## build
+
+```bash
+hugo 
+```
+
+local server
+
+```bash
+hugo server -D
+```
