@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MBTI on xeri的博客</title>
+    <link>/tags/mbti/</link>
+    <description>Recent content in MBTI on xeri的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>xeri_chen@163.com (xeri)</managingEditor>
+    <webMaster>xeri_chen@163.com (xeri)</webMaster>
+    <copyright>© 2026 xeri</copyright>
+    <lastBuildDate>Tue, 20 Jan 2026 17:11:35 +0800</lastBuildDate><atom:link href="/tags/mbti/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ESTJ</title>
+      <link>/posts/estj/</link>
+      <pubDate>Tue, 20 Jan 2026 17:11:35 +0800</pubDate>
+      <author>xeri_chen@163.com (xeri)</author>
+      <guid>/posts/estj/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>INFP</title>
+      <link>/posts/infp/</link>
+      <pubDate>Tue, 20 Jan 2026 16:15:47 +0800</pubDate>
+      <author>xeri_chen@163.com (xeri)</author>
+      <guid>/posts/infp/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>
