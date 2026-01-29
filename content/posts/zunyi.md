@@ -2,6 +2,7 @@
 title: "Zunyi"
 date: 2026-01-29T16:12:50+08:00
 draft: false
+tags: ["travel", "Zunyi"]
 description: ""
 ---
 

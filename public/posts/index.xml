@@ -2,71 +2,81 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on XeriChen的博客</title>
-    <link>//localhost:1313/posts/</link>
+    <link>/posts/</link>
     <description>Recent content in Posts on XeriChen的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>xeri_chen@163.com (xeri_chen)</managingEditor>
     <webMaster>xeri_chen@163.com (xeri_chen)</webMaster>
     <copyright>© 2026 xeri_chen</copyright>
-    <lastBuildDate>Tue, 20 Jan 2026 17:27:24 +0800</lastBuildDate><atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Jan 2026 16:12:50 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Zunyi</title>
+      <link>/posts/zunyi/</link>
+      <pubDate>Thu, 29 Jan 2026 16:12:50 +0800</pubDate>
+      <author>xeri_chen@163.com (xeri_chen)</author>
+      <guid>/posts/zunyi/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>ESTJandINFP</title>
-      <link>//localhost:1313/posts/estjandinfp/</link>
+      <link>/posts/estjandinfp/</link>
       <pubDate>Tue, 20 Jan 2026 17:27:24 +0800</pubDate>
       <author>xeri_chen@163.com (xeri_chen)</author>
-      <guid>//localhost:1313/posts/estjandinfp/</guid>
+      <guid>/posts/estjandinfp/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>ESTJ</title>
-      <link>//localhost:1313/posts/estj/</link>
+      <link>/posts/estj/</link>
       <pubDate>Tue, 20 Jan 2026 17:11:35 +0800</pubDate>
       <author>xeri_chen@163.com (xeri_chen)</author>
-      <guid>//localhost:1313/posts/estj/</guid>
+      <guid>/posts/estj/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>INFP</title>
-      <link>//localhost:1313/posts/infp/</link>
+      <link>/posts/infp/</link>
       <pubDate>Tue, 20 Jan 2026 16:15:47 +0800</pubDate>
       <author>xeri_chen@163.com (xeri_chen)</author>
-      <guid>//localhost:1313/posts/infp/</guid>
+      <guid>/posts/infp/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>那些年喜欢的二次元老婆</title>
-      <link>//localhost:1313/posts/lovely/</link>
+      <link>/posts/lovely/</link>
       <pubDate>Mon, 19 Jan 2026 16:30:13 +0800</pubDate>
       <author>xeri_chen@163.com (xeri_chen)</author>
-      <guid>//localhost:1313/posts/lovely/</guid>
+      <guid>/posts/lovely/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Phy</title>
-      <link>//localhost:1313/posts/phy/</link>
+      <link>/posts/phy/</link>
       <pubDate>Fri, 31 Oct 2025 21:45:33 +0800</pubDate>
       <author>xeri_chen@163.com (xeri_chen)</author>
-      <guid>//localhost:1313/posts/phy/</guid>
+      <guid>/posts/phy/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>My Fiest Post</title>
-      <link>//localhost:1313/posts/my-fiest-post/</link>
+      <link>/posts/my-fiest-post/</link>
       <pubDate>Fri, 31 Oct 2025 18:41:19 +0800</pubDate>
       <author>xeri_chen@163.com (xeri_chen)</author>
-      <guid>//localhost:1313/posts/my-fiest-post/</guid>
+      <guid>/posts/my-fiest-post/</guid>
       <description></description>
       
     </item>
