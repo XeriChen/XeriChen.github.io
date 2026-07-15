@@ -1,0 +1,41 @@
+# 1. 媒体文件配置
+media:
+  input: content
+  output: /
+  path: /
+
+# 2. 内容集合配置
+content:
+  - name: posts
+    label: 博客文章
+    type: collection
+    path: content/posts
+    format:
+      type: yaml
+      frontmatter: true
+    fields:
+      - name: title
+        label: 标题
+        type: string
+      - name: date
+        label: 发布日期
+        type: date
+        options:
+          format: "YYYY-MM-DD"
+      - name: draft
+        label: 是否为草稿
+        type: boolean
+        default: false
+      - name: tags
+        label: 标签
+        type: list
+      - name: description
+        label: 文章摘要
+        type: text
+      - name: body
+        label: 正文内容
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+          media: false
