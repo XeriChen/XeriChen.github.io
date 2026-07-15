@@ -1,4 +1,4 @@
-# 1. 媒体文件配置
+# 1. 媒体文件配置（保持页面束特性）
 media:
   input: content
   output: /
@@ -10,9 +10,7 @@ content:
     label: 博客文章
     type: collection
     path: content/posts
-    format:
-      type: yaml
-      frontmatter: true
+    format: yaml-frontmatter  # 关键修复：明确指定为 yaml-frontmatter 格式
     fields:
       - name: title
         label: 标题
@@ -20,8 +18,6 @@ content:
       - name: date
         label: 发布日期
         type: date
-        options:
-          format: "YYYY-MM-DD"
       - name: draft
         label: 是否为草稿
         type: boolean
