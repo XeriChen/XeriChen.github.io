@@ -21,22 +21,28 @@
     weight  = 7
 
 [[main]]
+    name    = "工具链"
+    parent  = "文章"
+    pageRef = "tags/工具链"
+    weight  = 8
+
+[[main]]
     name    = "MBTI"
     parent  = "文章"
     pageRef = "tags/mbti"
-    weight  = 8
+    weight  = 9
 
 [[main]]
     name    = "LOVE"
     parent  = "文章"
     pageRef = "tags/love"
-    weight  = 9
+    weight  = 10
 
 [[main]]
     name    = "旅行"
     parent  = "文章"
     pageRef = "tags/travel"
-    weight  = 10
+    weight  = 11
 
     #[[main]]
     #  name = "Parent"
