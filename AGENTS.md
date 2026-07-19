@@ -20,10 +20,14 @@
 | 组件 | 当前约定 | 说明 |
 |------|----------|------|
 | Hugo（CI） | `0.163.3` extended | `.github/workflows/hugo.yaml` 中 `HUGO_VERSION` |
-| Blowfish | 子模块 pin 的 tag/commit | 勿只改工作区而不更新 gitlink |
+| Blowfish | **v2.104.0**（submodule pin） | `git submodule status`；勿只改工作区而不更新 gitlink |
 | 主题声明的 Hugo | min `0.158.0`，max `0.163.3` | 见 `themes/blowfish/config.toml` 的 `[module.hugoVersion]` |
 
 升级主题后**必须**再读主题 `config.toml` 的 `min`/`max`，并同步改 CI 的 `HUGO_VERSION`。不要升到超过主题 `max` 的 Hugo，除非已确认主题兼容。
+
+**本地推荐安装（与 CI 对齐）：** 官方  
+`hugo_extended_0.163.3_linux-amd64.tar.gz` → `~/.local/bin/hugo`  
+（不要用 apt 的偏旧包，也不要用 snap 默认的 `0.164.0` 除非已确认主题 max 放宽。）
 
 克隆与子模块：
 
@@ -39,6 +43,7 @@ git submodule update --init --recursive
 .
 ├── AGENTS.md                 # 本文件（agent 规则）
 ├── README.md                 # 人类向简介
+├── .gitignore                # 忽略 public/ 等 Hugo 产物
 ├── .github/workflows/hugo.yaml   # 构建与部署
 ├── .gitmodules               # blowfish 子模块定义
 ├── .pages.yml                # Pages CMS 字段
@@ -46,17 +51,17 @@ git submodule update --init --recursive
 ├── config/_default/          # 站点配置（主配置区）
 │   ├── hugo.toml
 │   ├── languages.zh-cn.toml  # 语言 / 作者 / locale
-│   ├── menus.zh-cn.toml      # 导航菜单与标签入口
+│   ├── menus.zh-cn.toml      # 顶栏/页脚菜单与标签入口
 │   ├── markup.toml           # Goldmark / KaTeX 分隔符
 │   ├── params.toml           # Blowfish 主题参数
 │   └── module.toml           # 当前为空；未用 Hugo Modules
 ├── content/posts/            # 博客正文（主要工作区）
-├── public/                   # 本地/历史构建产物（见第 7 节）
+├── public/                   # 本地构建产物（gitignore，见第 7 节）
 └── themes/blowfish/          # 主题 submodule，勿当普通目录乱改
 ```
 
 **优先编辑：** `content/posts/`、`config/_default/`、`archetypes/`、本文件与 `README.md`。  
-**谨慎编辑：** `.github/workflows/`、`.gitmodules`、主题子模块指针。  
+**谨慎编辑：** `.github/workflows/`、`.gitmodules`、`.gitignore`、主题子模块指针。  
 **不要当主题源码仓库改：** `themes/blowfish/**` 内业务定制应尽量用站点侧 `config` / 覆盖布局（若以后引入 layouts），而不是直接 fork 式改 submodule 内文件（除非用户明确要求升级或 patch 主题）。
 
 ## 4. 文章规范
@@ -89,20 +94,37 @@ description: "一句话摘要，用于列表/SEO，可为空字符串"
 
 - `date` 使用带时区的 ISO 时间，时区 **`+08:00`**（与 CI `TZ: Asia/Shanghai` 一致）。
 - `draft: true` 不会出现在生产构建（CI 未开 `buildDrafts`）。
-- `tags` 为字符串列表。现有导航里已挂过的标签入口包括（见 `menus.zh-cn.toml`）：`mbti`、`love`、`travel` 等；新标签可不进菜单，但会出现在标签页。
+- `tags` 为字符串列表。顶栏「文章」下拉已挂入口见下节；新标签可不进菜单，但会出现在 `/tags/`。
 - 正文以 **简体中文** 为主；技术术语可保留英文。
 - 文件名可用英文 slug（如 `grok-build-guide.md`）或中文（如 `遵义游玩攻略-景点篇.md`）；新建时优先 **简短英文/拼音 slug**，减少编码与链接问题。
 - 数学公式：站点已开 passthrough，可用 `$$...$$` 或 `\[...\]`；部分旧文使用 `{{</* katex */>}}` shortcode，保持与同文一致即可。
 - 图片：现有文章多用外链图床（如 GitHub raw）。新增图片时沿用用户习惯；不要擅自引入未说明的大体积二进制，除非用户要求。
 
-### 4.3 常用内容操作清单
+### 4.3 顶栏菜单与标签入口
+
+配置文件：`config/_default/menus.zh-cn.toml`（`[[main]]`）。
+
+当前「文章」下拉（`parent = "文章"`，按 weight 升序）：
+
+| 显示名 | pageRef | 说明 |
+|--------|---------|------|
+| 工具链 | `tags/工具链` | 置顶；对应文章 tag `工具链` |
+| MBTI | `tags/mbti` | |
+| LOVE | `tags/love` | |
+| 旅行 | `tags/travel` | |
+
+另有顶栏「标签」→ `tags`（全部标签页），以及 `[[footer]]` 页脚入口。
+
+**改顶栏标签快捷方式：** 改 `menus.zh-cn.toml`；**改文章归属：** 改 front matter 的 `tags`。两者需一致，否则菜单会链到空标签页。
+
+### 4.4 常用内容操作清单
 
 | 任务 | 做法 |
 |------|------|
 | 写新文章 | 新增 `content/posts/*.md` + front matter |
-| 改站名/作者/简介 | `config/_default/languages.zh-cn.toml` |
-| 改主题外观/首页 | `config/_default/params.toml` |
-| 改顶栏菜单 | `config/_default/menus.zh-cn.toml` |
+| 改站名/作者/社交图标 | `config/_default/languages.zh-cn.toml`（`[params.author]`、`links`） |
+| 改主题外观/首页布局 | `config/_default/params.toml`（如 `[homepage] layout = "profile"`） |
+| 改顶栏/页脚菜单 | `config/_default/menus.zh-cn.toml` |
 | 改分页/站点级 Hugo 选项 | `config/_default/hugo.toml` |
 | 改 CMS 表单字段 | `.pages.yml` |
 
@@ -116,20 +138,21 @@ hugo --gc --minify
 
 # 本地预览（含草稿）
 hugo server -D
+# 仅本机：hugo server -D --bind 127.0.0.1
 ```
 
 CI 构建要点（见 workflow）：
 
 - `actions/checkout`：`submodules: recursive`，`fetch-depth: 0`
-- Hugo Extended `HUGO_VERSION`
+- Hugo Extended `HUGO_VERSION`（当前 `0.163.3`）
 - `hugo --gc --minify --baseURL "<pages base URL>/"`
-- 产物目录 `public`，上传为 Pages artifact 并部署
+- 产物目录 `public`，上传为 Pages artifact 并部署（**不依赖仓库内的 public/**）
 
 推送到 **`main`** 会触发部署；`workflow_dispatch` 可手动跑。
 
 ## 6. 主题升级流程（Blowfish）
 
-1. 确认当前 pin：`git submodule status` / `git ls-tree HEAD themes/blowfish`
+1. 确认当前 pin：`git submodule status` / `git ls-tree HEAD themes/blowfish`（现为 v2.104.0）
 2. 更新子模块到目标 tag（例）：
    ```bash
    git submodule update --init --recursive
@@ -138,20 +161,26 @@ CI 构建要点（见 workflow）：
    ```
 3. 读取 `themes/blowfish/config.toml` 中 `[module.hugoVersion]`，更新 `.github/workflows/hugo.yaml` 的 `HUGO_VERSION`（保持 extended，且 ≤ max）
 4. 对照 [Blowfish 配置文档](https://blowfish.page/docs/configuration/) 与 release notes，必要时迁移 `config/_default/*.toml`（如语言字段、弃用参数）
-5. 本地能跑则 `hugo` 验证；不能则靠 CI
+5. 本地能跑则 `hugo --gc --minify` 验证；不能则靠 CI
 6. 提交时包含：**子模块 gitlink** + workflow + 任何配置迁移；commit 信息说明版本号
 
 子模块远程：`git@github.com:nunocoracao/blowfish.git`，`.gitmodules` 中 `branch = main`。
 
-## 7. 关于 `public/`
+## 7. 关于 `public/` 与 `.gitignore`
 
-`public/` 为 Hugo 本地/CI 构建产物，已在 **`.gitignore`** 中忽略，**不要提交**。正式发布以 **GitHub Actions 现构建** 并上传 Pages artifact 为准。
+`.gitignore` **仅忽略 Hugo 构建/运行产物**：
 
-Agent 默认行为：
+```
+/public/
+/resources/
+.hugo_build.lock
+.hugo_cache/
+```
 
-- 日常改文章/配置：只提交 `content/`、`config/` 等源文件。
-- 本地 `hugo` / `hugo server` 会生成 `public/`，保持未跟踪即可。
-- 不要把 `public/` 从 `.gitignore` 拿掉并重新入库，除非用户明确要求改部署方式。
+- `public/` **不要提交**；本地 `hugo` / `hugo server` 生成即可。
+- 正式发布以 **GitHub Actions 现构建** 的 artifact 为准。
+- 不要把 `public/` 重新入库，除非用户明确要求改部署方式。
+- 本地测试可 `rm -rf public && hugo --gc --minify` 得到干净构建树。
 
 ## 8. Git / PR 约定
 
@@ -162,6 +191,7 @@ Agent 默认行为：
 - 不要强推 `main`，不要随意改 git config。
 - 可用 `gh` 查看 Actions：`gh run list`、`gh run watch`。
 - 子模块指针变更要进同一次提交，避免 CI checkout 到空主题。
+- **不要**提交本地 `hugo server` 产物（含 `127.0.0.1`、livereload 的 HTML）。
 
 ## 9. 安全与边界
 
@@ -179,14 +209,19 @@ Agent 默认行为：
 2. 设好 `title` / `date` / `draft` / `tags` / `description`
 3. 用户要求时再 commit & push，观察 Actions 是否 green
 
-**改站点展示名或社交链接**
+**顶栏挂新标签入口**
 
-- `config/_default/languages.zh-cn.toml` 的 `title`、`[params.author]`、`links`
+1. 确保至少一篇文的 `tags` 含该名  
+2. 在 `menus.zh-cn.toml` 增加 `[[main]]`，`pageRef = "tags/<名>"`，用 `weight` / `parent` 控制位置  
+
+**改站点展示名或社交图标链接**
+
+- `languages.zh-cn.toml` 的 `title`、`[params.author]`、`links`（键名对应 `assets/icons/<name>.svg` 或主题内置图标）
 
 **升级工具链**
 
 1. 升 Blowfish submodule  
-2. 对齐 Hugo CI 版本  
+2. 对齐 Hugo CI 版本（及本地 Hugo）  
 3. 修配置弃用项  
 4. 推送并确认 Pages 构建成功  
 
@@ -202,8 +237,9 @@ Agent 默认行为：
 - Blowfish Releases：https://github.com/nunocoracao/blowfish/releases  
 - Hugo Releases：https://github.com/gohugoio/hugo/releases  
 - 主题要求（本仓库内）：`themes/blowfish/config.toml`  
-- CI：`.github/workflows/hugo.yaml`
+- CI：`.github/workflows/hugo.yaml`  
+- 忽略规则：`.gitignore`
 
 ---
 
-**原则：** 源码在 `content/` 与 `config/`；主题用 submodule 固定版本；部署交给 CI；少动 `public/`；版本变更成对升级（主题 + Hugo）；中文内容、上海时区、用户点头再推送。
+**原则：** 源码在 `content/` 与 `config/`；主题用 submodule 固定版本；部署交给 CI；`public/` 永不入库；版本变更成对升级（主题 + Hugo）；中文内容、上海时区、用户点头再推送。
