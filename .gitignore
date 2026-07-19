@@ -1,0 +1,12 @@
+# Hugo local / CI build output (GitHub Pages deploys from Actions, not this tree)
+/public/
+
+# Hugo
+.hugo_build.lock
+resources/
+.hugo_cache/
+
+# OS / editor
+.DS_Store
+*.swp
+*~

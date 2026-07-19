@@ -145,13 +145,13 @@ CI 构建要点（见 workflow）：
 
 ## 7. 关于 `public/`
 
-仓库中 **跟踪了一部分历史构建产物**（`public/` 在 git 中有文件）。正式发布以 **GitHub Actions 现构建** 为准。
+`public/` 为 Hugo 本地/CI 构建产物，已在 **`.gitignore`** 中忽略，**不要提交**。正式发布以 **GitHub Actions 现构建** 并上传 Pages artifact 为准。
 
 Agent 默认行为：
 
-- **不要**为了「部署」去整库重生成并提交 `public/`，除非用户明确要求同步静态产物。
-- 日常改文章/配置：只提交源文件即可。
-- 若用户要求清理 git 中的 `public/` 或补 `.gitignore`，先说明影响再改，不要静默大删。
+- 日常改文章/配置：只提交 `content/`、`config/` 等源文件。
+- 本地 `hugo` / `hugo server` 会生成 `public/`，保持未跟踪即可。
+- 不要把 `public/` 从 `.gitignore` 拿掉并重新入库，除非用户明确要求改部署方式。
 
 ## 8. Git / PR 约定
 
