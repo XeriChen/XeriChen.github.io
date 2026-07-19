@@ -1,12 +1,5 @@
-# Hugo local / CI build output (GitHub Pages deploys from Actions, not this tree)
+# Hugo 构建与运行产物（站点由 GitHub Actions 构建部署，勿入库）
 /public/
-
-# Hugo
+/resources/
 .hugo_build.lock
-resources/
 .hugo_cache/
-
-# OS / editor
-.DS_Store
-*.swp
-*~
