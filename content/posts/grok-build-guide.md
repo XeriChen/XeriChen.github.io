@@ -377,6 +377,8 @@ enabled = true
 | 变量 | 含义 |
 |------|------|
 | `XAI_API_KEY` | API Key |
+| `GROK_DEFAULT_MODEL` | 临时覆盖默认模型（高于 config） |
+| `GROK_MODELS_BASE_URL` | 全局模型目录/请求基址（整机走单一网关时使用） |
 | `GROK_HOME` | 配置根目录（默认 `~/.grok`） |
 | `GROK_MEMORY` | `1`/`0` 开关记忆 |
 | `GROK_SUBAGENTS` | 子代理开关 |
@@ -765,19 +767,81 @@ grok --sandbox strict      # 更严，适合不信任的代码
 
 ## 二十四、自定义模型（BYOK / 兼容端点）
 
-可在 config 里挂 OpenAI 兼容 / Anthropic Messages 等后端：
+Grok Build 支持把官方模型与第三方/自建上游并排使用。  
+常见协议是 OpenAI 兼容（`chat_completions` / `responses`）和 Anthropic Messages（`messages`）。
+
+### 24.1 接入单个第三方模型
+
+可在 config 里添加一个独立模型条目：
 
 ```toml
-[model.my-proxy]
-model = "grok-build"
-base_url = "https://grok-proxy.acme.com/v1"
-name = "Company Grok"
-env_key = "XAI_API_KEY"
-api_backend = "chat_completions"   # 或 responses / messages
+[model.sub2api-grok]
+model = "grok-4.5"   # 发给上游 API 的 model 字段
+base_url = "https://your-gateway.example.com/v1"
+name = "Grok 4.5 via Gateway"
+env_key = "SUB2API_API_KEY"   # 推荐：用环境变量，不要把 key 明文写进仓库
+api_backend = "responses"     # 或 chat_completions / messages
 context_window = 128000
+supports_reasoning_effort = true
 ```
 
-`grok models` 查看列表；会话中 `/model` 或 `Ctrl+M` 切换。
+字段要点：
+
+- `model`：上游真实模型 ID（不是你给 `[model.xxx]` 起的段名）
+- `base_url`：第三方网关根路径（通常以 `/v1` 结尾）
+- `api_backend`：必须和上游协议一致；不一致常见报错是 404/401/空响应
+- `env_key`：可指定该模型专用密钥变量，避免和官方 `XAI_API_KEY` 混用
+
+验证：
+
+```bash
+grok models
+grok -m sub2api-grok -p "ping"
+```
+
+会话内可用 `/model sub2api-grok` 或 `Ctrl+M` 切换。
+
+### 24.2 同时使用多个提供商（官方 + 第三方）
+
+推荐做法：每个提供商一个独立 `[model.xxx]`，再用 `[models] default` 设默认。
+
+```toml
+[models]
+default = "sub2api-grok"
+# web_search = "sub2api-grok"   # 仅当该上游确认支持时再开启
+
+[model.sub2api-grok]
+model = "grok-4.5"
+base_url = "https://sub2api.example.com/v1"
+name = "Grok via Sub2API"
+env_key = "SUB2API_API_KEY"
+api_backend = "responses"
+context_window = 500000
+supports_reasoning_effort = true
+
+[model.vendor-a]
+model = "claude-sonnet-4-5"
+base_url = "https://vendor-a.example.com/v1"
+name = "Claude via Vendor-A"
+env_key = "VENDOR_A_API_KEY"
+api_backend = "messages"
+context_window = 200000
+
+# 也可保留官方模型并随时切回：
+# /model grok-4.5
+```
+
+建议：
+
+1. **并存优先用 `[model.xxx]` 分段**，不要先用全局 `models_base_url` 覆盖整机 catalog。  
+2. 不同提供商用不同 `env_key`，方便轮换密钥与最小权限管理。  
+3. 给 `name` 写清楚 `via XXX`，减少切模型时误选。
+
+### 24.3 常见坑（很容易踩）
+
+- `[models] default` 只影响**新建会话**；`/resume` 旧会话会保留原模型。
+- 模型段名若带点，需写成 `[model."a.b"]`，否则 TOML 会被当成层级路径。
+- 若第三方不支持某能力（如后端搜索、reasoning 参数），不要盲开相关开关。
 
 ---
 
