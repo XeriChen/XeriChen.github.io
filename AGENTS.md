@@ -19,14 +19,14 @@
 
 | 组件 | 当前约定 | 说明 |
 |------|----------|------|
-| Hugo（CI） | `0.163.3` extended | `.github/workflows/hugo.yaml` 中 `HUGO_VERSION` |
-| Blowfish | **v2.104.0**（submodule pin） | `git submodule status`；勿只改工作区而不更新 gitlink |
-| 主题声明的 Hugo | min `0.158.0`，max `0.163.3` | 见 `themes/blowfish/config.toml` 的 `[module.hugoVersion]` |
+| Hugo（CI） | `0.164.0` extended | `.github/workflows/hugo.yaml` 中 `HUGO_VERSION` |
+| Blowfish | **v2.105.0**（submodule pin） | `git submodule status`；勿只改工作区而不更新 gitlink |
+| 主题声明的 Hugo | min `0.158.0`，max `0.164.0` | 见 `themes/blowfish/config.toml` 的 `[module.hugoVersion]` |
 
 升级主题后**必须**再读主题 `config.toml` 的 `min`/`max`，并同步改 CI 的 `HUGO_VERSION`。不要升到超过主题 `max` 的 Hugo，除非已确认主题兼容。
 
 **本地推荐安装（与 CI 对齐）：** 官方  
-`hugo_extended_0.163.3_linux-amd64.tar.gz` → `~/.local/bin/hugo`  
+`hugo_extended_0.164.0_linux-amd64.tar.gz` → `~/.local/bin/hugo`  
 （不要用 apt 的偏旧包，也不要用 snap 默认的 `0.164.0` 除非已确认主题 max 放宽。）
 
 克隆与子模块：
