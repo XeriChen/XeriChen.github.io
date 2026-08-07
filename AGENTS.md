@@ -158,11 +158,20 @@ hugo server -D
 CI 构建要点（见 workflow）：
 
 - `actions/checkout`：`submodules: recursive`，`fetch-depth: 0`
-- Hugo Extended `HUGO_VERSION`（当前 `0.163.3`）
-- `hugo --gc --minify --baseURL "<pages base URL>/"`
+- Hugo Extended `HUGO_VERSION`（当前 `0.164.0`）
+- `hugo --gc --minify --panicOnWarning --baseURL "<pages base URL>/"`
 - 产物目录 `public`，上传为 Pages artifact 并部署（**不依赖仓库内的 public/**）
 
-推送到 **`main`** 会触发部署；`workflow_dispatch` 可手动跑。
+推送到 **`main`** 会触发部署；针对 `main` 的 PR 只跑构建校验（不部署）；`workflow_dispatch` 可手动跑。
+
+失败前置检查（都会让 job 直接红掉，而不是产出坏站点）：
+
+- `themes/blowfish/config.toml` 不存在 → 子模块没检出，报错退出
+- `configure-pages` 没返回 `base_url` → 报错退出（否则站内链接会全部指向 `/`）
+- `--panicOnWarning`：Hugo 的警告（弃用参数、缺失布局等）当作失败处理。升级主题/Hugo 后若出现无法立刻消除的弃用警告，先修配置，不要直接删这个参数。
+- 构建后校验 `public/index.html`、`public/sitemap.xml` 非空且 HTML 页面数 ≥ 10
+
+配置侧同样不再吞错：`config/_default/hugo.toml` 里 `refLinksErrorLevel = "ERROR"`（`ref`/`relref` 指向不存在页面直接构建失败）、`enableMissingTranslationPlaceholders = true`（缺翻译会在页面上显示 `[i18n]` 占位符）。
 
 ## 6. 主题升级流程（Blowfish）
 
