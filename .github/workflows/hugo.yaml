@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 permissions:
   contents: read
@@ -13,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 defaults:
   run:
-    shell: bash
+    shell: bash -euo pipefail {0}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,8 +29,15 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Verify theme submodule
+        run: |
+          if [ ! -f themes/blowfish/config.toml ]; then
+            echo "::error::themes/blowfish 未检出，构建会退化为无主题站点。检查 .gitmodules 与 checkout 的 submodules 设置。"
+            exit 1
+          fi
       - name: Setup Pages
         id: pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -48,23 +58,49 @@ jobs:
           restore-keys:
             hugo-
       - name: Build the site
+        env:
+          PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base_url="https://example.invalid"
+          elif [ -z "$PAGES_BASE_URL" ]; then
+            echo "::error::configure-pages 未返回 base_url，继续构建会生成链接全部指向 / 的站点。"
+            exit 1
+          else
+            base_url="$PAGES_BASE_URL"
+          fi
           hugo \
             --gc \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/" \
+            --panicOnWarning \
+            --baseURL "$base_url/" \
             --cacheDir "${{ runner.temp }}/hugo_cache"
+      - name: Verify build output
+        run: |
+          if [ ! -s public/index.html ] || [ ! -s public/sitemap.xml ]; then
+            echo "::error::构建产物不完整：public/index.html 或 public/sitemap.xml 缺失或为空。"
+            exit 1
+          fi
+          pages=$(find public -name '*.html' | wc -l)
+          echo "生成 HTML 页面数：$pages"
+          if [ "$pages" -lt 10 ]; then
+            echo "::error::只生成了 $pages 个页面，远少于预期，可能是内容目录或主题未正确加载。"
+            exit 1
+          fi
       - name: Cache save
         id: cache-save
+        if: github.event_name != 'pull_request'
         uses: actions/cache/save@v4
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

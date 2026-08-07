@@ -13,6 +13,11 @@ hasCJKLanguage = true #汉字计数
 enableRobotsTXT = true
 summaryLength = 0
 
+# 站内 ref/relref 指向不存在的页面时直接报错，而不是只打一条警告后生成空链接
+refLinksErrorLevel = "ERROR"
+# 缺少翻译时输出占位符，便于发现漏翻，而不是静默渲染成空白
+enableMissingTranslationPlaceholders = true
+
 buildDrafts = false
 buildFuture = false
 
