@@ -12,19 +12,19 @@
 
 | 组件 | 版本约定 |
 |------|----------|
-| Hugo（CI / 推荐本地） | **0.164.0 Extended** |
-| Blowfish | **v2.105.0**（git submodule） |
-| 主题支持的 Hugo | min `0.158.0`，max `0.164.0` |
+| Hugo（CI / 推荐本地） | **0.165.0 Extended** |
+| Blowfish | **v3.5.0**（git submodule） |
+| 主题支持的 Hugo | min `0.162.0`，max `0.165.0` |
 
 本地安装示例（Linux amd64，与 CI 对齐）：
 
 ```bash
 cd /tmp
 curl -fsSL -o hugo.tar.gz \
-  https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_linux-amd64.tar.gz
+  https://github.com/gohugoio/hugo/releases/download/v0.165.0/hugo_extended_0.165.0_linux-amd64.tar.gz
 tar -xzf hugo.tar.gz hugo
 mkdir -p ~/.local/bin && install -m 755 hugo ~/.local/bin/hugo
-hugo version   # 应含 v0.164.0+extended
+hugo version   # 应含 v0.165.0+extended
 ```
 
 ## 克隆
