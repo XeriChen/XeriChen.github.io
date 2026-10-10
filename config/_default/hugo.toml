@@ -37,8 +37,15 @@ enableEmoji = true
   filename = 'sitemap.xml'
   priority = 0.5
 
+[outputFormats]
+  [outputFormats.llms]
+    mediaType = "text/plain"
+    baseName = "llms"
+    isPlainText = true
+    notAlternative = true
+
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "llms"]
 
 [related]
   threshold = 0
