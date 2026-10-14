@@ -6,6 +6,12 @@
     "directory": "./public",
     "not_found_handling": "404-page"
   },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "r2-free-10g"
+    }
+  ],
   "routes": [
     {
       "pattern": "blog.xerichen.de5.net",
