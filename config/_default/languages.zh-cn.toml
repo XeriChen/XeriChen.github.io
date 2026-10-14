@@ -17,10 +17,10 @@ title = "XeriChen的博客"
  [params.author]
    name = "xeri_chen"
    email = "xeri_chen@163.com"
-#   image = "img/blowfish_logo.png"
-#   imageQuality = 96
-#   headline = "I'm only human"
-#   bio = "A little bit about you"
+   image = "img/avatar.png"
+   imageQuality = 96
+   headline = "终身学习者 / 探索大模型协同与科学计算"
+   bio = "凝聚态物理理论博士生。对数学推导与代码实现抱有长久兴趣，专注于探索大模型协同科研，在这里分享严谨求真的技术实践。"
    links = [
      { email = "mailto:xeri_chen@163.com" },
 #     { link = "https://link-to-some-website.com/" },
