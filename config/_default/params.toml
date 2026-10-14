@@ -68,9 +68,9 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
   layout = "profile" # valid options: page, profile, hero, card, background, landing, custom
   layoutSwitcher = false # opt-in interactive preview of the built-in layouts
   #homepageImage = "IMAGE.jpg" # used in: hero, and card
-  showRecent = false
+  showRecent = true
   showRecentItems = 5
-  showMoreLink = false
+  showMoreLink = true
   showMoreLinkDest = "/posts/"
   cardView = false
   cardViewScreenWidth = false
@@ -89,12 +89,13 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
   # heroStyle = "basic" # valid options: basic, big, background, thumbAndBackground
   layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
   layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
-  showBreadcrumbs = false
+  showBreadcrumbs = true
   showDraftLabel = true
   showEdit = false
   # editURL = "https://github.com/username/repo/"
   editAppendPath = true
-  seriesOpened = false
+  seriesOpened = true
+  showComments = true
   showHeadingAnchors = true
   showPagination = true
   invertPagination = false
@@ -119,8 +120,8 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
   # heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
   layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
   layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
-  showBreadcrumbs = false
-  showSummary = false
+  showBreadcrumbs = true
+  showSummary = true
   showViews = false
   showLikes = false
   showTableOfContents = false
@@ -203,3 +204,20 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
 
 [advertisement]
   # adsense = ""
+
+[giscus]
+  # 开启 Giscus 评论（基于 GitHub Discussions）
+  # 配置指南见: https://giscus.app
+  enable = true
+  repo = "XeriChen/XeriChen.github.io"
+  repoId = "R_kgDOK2T43Q"
+  category = "General"
+  categoryId = "DIC_kwDOK2T43c4DIaVd"
+  mapping = "pathname"
+  strict = "0"
+  reactionsEnabled = "1"
+  emitMetadata = "0"
+  inputPosition = "top"
+  theme = "preferred_color_scheme" # 自动跟随系统/Blowfish明暗主题切换
+  lang = "zh-CN"
+  loading = "lazy"

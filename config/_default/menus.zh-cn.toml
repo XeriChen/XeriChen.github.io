@@ -10,89 +10,73 @@
 # overridden by providing a weight value. The menu will then be
 # ordered by weight from lowest to highest.
 
-#[[main]]
-#name = "Blog"
-#pageRef = "/posts"
-#weight = 10
-
 [[main]]
-    name    = "文章"
-    pageRef = "/posts"
-    weight  = 7
-
-[[main]]
-    name    = "工具链"
-    parent  = "文章"
-    pageRef = "tags/工具链"
-    weight  = 8
-
-[[main]]
-    name    = "MBTI"
-    parent  = "文章"
-    pageRef = "tags/mbti"
-    weight  = 9
-
-[[main]]
-    name    = "LOVE"
-    parent  = "文章"
-    pageRef = "tags/love"
+    name    = "技术探索"
+    pageRef = "tags/学习笔记"
     weight  = 10
 
 [[main]]
-    name    = "旅行"
-    parent  = "文章"
-    pageRef = "tags/travel"
+    name    = "学习笔记"
+    parent  = "技术探索"
+    pageRef = "tags/学习笔记"
     weight  = 11
 
-    #[[main]]
-    #  name = "Parent"
-    #  weight = 20
+[[main]]
+    name    = "工具链"
+    parent  = "技术探索"
+    pageRef = "tags/工具链"
+    weight  = 12
 
-    #[[main]]
-    #  name = "example sub-menu 1"
-    #  parent = "Parent"
-    #  pageRef = "posts"
-    #  weight = 20
+[[main]]
+    name    = "AI / Agent"
+    parent  = "技术探索"
+    pageRef = "tags/ai"
+    weight  = 13
 
-    #[[main]]
-    #  name = "example sub-menu 2"
-    #  parent = "Parent"
-    #  pageRef = "posts"
-    #  weight = 20
+[[main]]
+    name    = "生活随笔"
+    pageRef = "tags/travel"
+    weight  = 20
 
-    #[[subnavigation]]
-    #  name = "An interesting topic"
-    #  pageRef = "tags/interesting-topic"
-    #  weight = 10
+[[main]]
+    name    = "旅行"
+    parent  = "生活随笔"
+    pageRef = "tags/travel"
+    weight  = 21
 
-    #[[subnavigation]]
-    #  name = "My Awesome Category"
-    #  pre = "github"
-    #  pageRef = "categories/awesome"
-    #  weight = 20
+[[main]]
+    name    = "MBTI"
+    parent  = "生活随笔"
+    pageRef = "tags/mbti"
+    weight  = 22
 
-    #[[main]]
-    #  name = "Categories"
-    #  pageRef = "categories"
-    #  weight = 20
+[[main]]
+    name    = "情感"
+    parent  = "生活随笔"
+    pageRef = "tags/love"
+    weight  = 23
+
+[[main]]
+    name    = "全部文章"
+    pageRef = "/posts"
+    weight  = 30
 
 [[main]]
     name    = "标签"
     pageRef = "tags"
-    weight  = 30
+    weight  = 40
 
 
-    # -- Footer Menu --
-    # The footer menu is displayed at the bottom of the page, just before
-    # the copyright notice. Configure as per the main menu above.
-
+# -- Footer Menu --
+# The footer menu is displayed at the bottom of the page, just before
+# the copyright notice. Configure as per the main menu above.
 
 [[footer]]
-    name    = "Tags"
+    name    = "标签"
     pageRef = "tags"
     weight  = 10
 
-    # [[footer]]
-    #   name = "Categories"
-    #   pageRef = "categories"
-    #   weight = 20
+[[footer]]
+    name    = "文章归档"
+    pageRef = "/posts"
+    weight  = 20
